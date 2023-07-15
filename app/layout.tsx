@@ -21,13 +21,16 @@ export const metadata: Metadata = {
 interface RootLayoutProps {
   children: React.ReactNode;
 }
+
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        <Providers>{children}</Providers>
-        <Footer />
+        <Providers>
+          <Navbar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

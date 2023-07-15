@@ -4,10 +4,12 @@
 import { CacheProvider } from "@chakra-ui/next-js";
 import {
   ChakraProvider,
-  StyleFunctionProps,
+  ColorModeScript,
   ThemeConfig,
   extendTheme,
 } from "@chakra-ui/react";
+import "@fontsource/open-sans/700.css";
+import "@fontsource/inter/400.css";
 
 type ProvidersProps = {
   children: React.ReactNode;
@@ -23,15 +25,19 @@ const colors = {
 };
 
 const config: ThemeConfig = {
-  initialColorMode: "system",
-  useSystemColorMode: true,
+  initialColorMode: "light",
+  useSystemColorMode: false,
 };
 
 export const theme = extendTheme({
   colors,
   config,
+  fonts: {
+    heading: `'Open Sans', sans-serif`,
+    body: `'Inter', sans-serif`,
+  },
   styles: {
-    global: (props: StyleFunctionProps) => ({
+    global: () => ({
       body: {
         color: "default",
         bg: colors.brunswickGreen,
@@ -43,7 +49,10 @@ export const theme = extendTheme({
 export function Providers({ children }: ProvidersProps) {
   return (
     <CacheProvider>
-      <ChakraProvider theme={theme}>{children}</ChakraProvider>
+      <ChakraProvider theme={theme}>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+        {children}
+      </ChakraProvider>
     </CacheProvider>
   );
 }
