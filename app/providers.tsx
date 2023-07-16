@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import "@fontsource/open-sans/700.css";
 import "@fontsource/inter/400.css";
+import "@fontsource/league-spartan/900.css";
 
 type ProvidersProps = {
   children: React.ReactNode;
@@ -22,6 +23,8 @@ const colors = {
   fernGreen: "#588157",
   hunterGreen: "#3A5A40",
   brunswickGreen: "#344E41",
+  neutralBeige: "#F1EFE7",
+  brownish: "#745E4D",
 };
 
 const config: ThemeConfig = {
@@ -32,15 +35,14 @@ const config: ThemeConfig = {
 export const theme = extendTheme({
   colors,
   config,
-  fonts: {
-    heading: `'Open Sans', sans-serif`,
-    body: `'Inter', sans-serif`,
-  },
+  fonts: { body: `'Inter', sans-serif`, heading: `'Open Sans', sans-serif` },
   styles: {
-    global: () => ({
+    global: ({ colorMode }: { colorMode: string }) => ({
       body: {
+        "--chakra-colors-bg": `var(--chakra-colors-${
+          colorMode === "light" ? "neutralBeige" : "brunswickGreen"
+        })`,
         color: "default",
-        bg: colors.brunswickGreen,
       },
     }),
   },

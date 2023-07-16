@@ -11,15 +11,14 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 function Footer() {
   return (
-    <Container as="footer" role="contentinfo">
+    <Container as="footer" role="contentinfo" maxW="4xl">
       <Stack
-        spacing={{ base: "4", md: "5" }}
+        spacing={{ base: "2", md: "4" }}
         textAlign="center"
         fontSize="x-small"
-        color="white"
       >
         <Text>&copy; {new Date().getFullYear()} Marta B.</Text>
-        <Text marginTop={2} px={6}>
+        <Text marginTop={2}>
           Veggie Bot Disclaimer: Use the information provided by Veggie Bot as a
           helpful tool, but always verify ingredient vegan status through
           reliable sources. Consult with a professional for dietary concerns.
@@ -36,7 +35,6 @@ function Footer() {
             aria-label="Open Linkedin page"
             icon={<FaLinkedin />}
             variant="unstyled"
-            color="white"
           />
           <IconButton
             as="a"
@@ -44,7 +42,6 @@ function Footer() {
             aria-label="Open Github page"
             icon={<FaGithub />}
             variant="unstyled"
-            color="white"
           />
         </ButtonGroup>
       </Stack>

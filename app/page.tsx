@@ -1,5 +1,5 @@
 "use client";
-import CallToAction from "@/components/ui/cta";
+import CallToAction from "@/components/cta";
 
 export default function Home() {
   return <CallToAction />;

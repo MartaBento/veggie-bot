@@ -14,11 +14,11 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@fontsource/inter": "^5.0.5",
+    "@fontsource/league-spartan": "^5.0.5",
     "@fontsource/open-sans": "^5.0.5",
     "@types/node": "20.4.2",
     "@types/react": "18.2.15",
     "@types/react-dom": "18.2.7",
-    "eslint": "8.44.0",
     "eslint-config-next": "13.4.10",
     "framer-motion": "^10.12.21",
     "next": "13.4.10",
@@ -26,5 +26,10 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.10.1",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "eslint": "^8.45.0",
+    "eslint-plugin-sort-keys": "^2.3.5",
+    "eslint-plugin-sort-keys-fix": "^1.1.2"
   }
 }

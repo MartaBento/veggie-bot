@@ -9,10 +9,17 @@ function Navbar() {
   return (
     <Box px={4}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
-        <Box>Logo</Box>
+        <Box
+          fontFamily="'League Spartan', sans-serif"
+          fontWeight="bold"
+          fontSize="xl"
+          color="brownish"
+        >
+          veggieBot
+        </Box>
         <Flex alignItems="center">
           <Stack direction="row" spacing={7}>
-            <Button onClick={toggleColorMode}>
+            <Button onClick={toggleColorMode} variant="unstyled">
               {colorMode === "light" ? <FaMoon /> : <FaSun />}
             </Button>
           </Stack>
