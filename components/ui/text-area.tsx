@@ -1,4 +1,4 @@
-import { Textarea, useColorModeValue } from "@chakra-ui/react";
+import { Textarea, FormLabel, useColorModeValue, Box } from "@chakra-ui/react";
 
 function TextArea() {
   const placeholderColor = useColorModeValue("gray.500", "gray.400");
@@ -7,30 +7,42 @@ function TextArea() {
   const textColor = useColorModeValue("brunswickGreen", "whiteAlpha.900");
 
   return (
-    <Textarea
-      placeholder="Enter a list of ingredients separated by commas (e.g., egg, onion, tomato, cheese, pasta...)"
-      size="lg"
-      borderWidth="1px"
-      borderColor={borderColor}
-      minHeight="100px"
-      _placeholder={{
-        color: placeholderColor,
-      }}
-      resize="none"
-      fontSize="sm"
-      bg={backgroundColor}
-      borderRadius="md"
-      p={4}
-      color={textColor}
-      shadow="md"
-      _focus={{
-        borderColor: useColorModeValue("sage", "whiteAlpha.600"),
-        shadow: "outline",
-      }}
-      _hover={{
-        borderColor: useColorModeValue("fernGreen", "whiteAlpha.600"),
-      }}
-    />
+    <Box>
+      <FormLabel
+        htmlFor="ingredients"
+        fontSize="xs"
+        fontWeight="bold"
+        mb={1}
+        color={useColorModeValue("gray.700", "gray.200")}
+      >
+        Enter the list of ingredients, separated by a comma:
+      </FormLabel>
+      <Textarea
+        id="ingredients"
+        placeholder="Separated by commas (e.g., egg, onion, tomato, cheese, pasta...)"
+        size="lg"
+        borderWidth="1px"
+        borderColor={borderColor}
+        minHeight="100px"
+        _placeholder={{
+          color: placeholderColor,
+        }}
+        resize="none"
+        fontSize="sm"
+        bg={backgroundColor}
+        borderRadius="md"
+        p={4}
+        color={textColor}
+        shadow="md"
+        _focus={{
+          borderColor: useColorModeValue("sage", "whiteAlpha.600"),
+          shadow: "outline",
+        }}
+        _hover={{
+          borderColor: useColorModeValue("fernGreen", "whiteAlpha.600"),
+        }}
+      />
+    </Box>
   );
 }
 

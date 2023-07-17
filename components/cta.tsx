@@ -10,9 +10,9 @@ import {
 import TextArea from "./ui/text-area";
 
 function CallToAction() {
-  const headingColor = useColorModeValue("hunterGreen", "fernGreen");
-  const textColor = useColorModeValue("gray.700", "gray.200");
-  const buttonColorScheme = useColorModeValue("fernGreen", "green");
+  const headingColor = useColorModeValue("brownish", "timberwolf");
+  const textColor = useColorModeValue("gray.500", "gray.400");
+  const buttonColorScheme = useColorModeValue("fernGreen", "hunterGreen");
 
   return (
     <Container maxW="4xl">
@@ -26,11 +26,17 @@ function CallToAction() {
           fontWeight={600}
           fontSize={{ base: "2xl", md: "6xl", sm: "4xl" }}
           lineHeight="100%"
-          color={headingColor}
+          as="h1"
         >
-          Discover the power of AI <br />
-          <Text as="span" color={headingColor}>
-            in your vegan journey 🌱
+          <Text as="span">Discover the power of AI</Text>
+          <Text color={headingColor} fontWeight={600}>
+            <span aria-hidden="true">in your vegan journey </span>
+            <span
+              aria-label="Leaf emoji representing vegan lifestyle"
+              role="img"
+            >
+              🌱
+            </span>
           </Text>
         </Heading>
         <Text
@@ -58,9 +64,11 @@ function CallToAction() {
             bg={buttonColorScheme}
             rounded="full"
             px={6}
+            color="white"
             _hover={{
-              bg: "green.500",
+              opacity: 0.9,
             }}
+            aria-label="Check Ingredient Vegan Status"
           >
             Check Ingredient Vegan Status
           </Button>

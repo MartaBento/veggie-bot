@@ -12,11 +12,7 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 function Footer() {
   return (
     <Container as="footer" role="contentinfo" maxW="4xl">
-      <Stack
-        spacing={{ base: "2", md: "4" }}
-        textAlign="center"
-        fontSize="x-small"
-      >
+      <Stack spacing={{ base: "2", md: "4" }} textAlign="center" fontSize="xs">
         <Text>&copy; {new Date().getFullYear()} Marta B.</Text>
         <Text marginTop={2}>
           Veggie Bot Disclaimer: Use the information provided by Veggie Bot as a
