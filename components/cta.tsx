@@ -20,16 +20,24 @@ function CallToAction() {
         as={Box}
         textAlign="center"
         spacing={{ base: 8, md: 14 }}
-        py={{ base: 6, md: 10 }}
+        py={{ base: 4, md: 6 }}
       >
-        <Heading
-          fontWeight={600}
-          fontSize={{ base: "2xl", md: "6xl", sm: "4xl" }}
-          lineHeight="100%"
-          as="h1"
-        >
-          <Text as="span">Discover the power of AI</Text>
-          <Text color={headingColor} fontWeight={600}>
+        <Box>
+          <Heading
+            as="h1"
+            fontWeight={600}
+            fontSize={{ base: "xl", md: "6xl", sm: "2xl" }}
+            lineHeight="100%"
+            marginBottom="-6"
+          >
+            Discover the power of AI
+          </Heading>
+          <Heading
+            color={headingColor}
+            fontWeight={600}
+            as="h2"
+            fontSize={{ base: "2xl", md: "6xl", sm: "4xl" }}
+          >
             <span aria-hidden="true">in your vegan journey </span>
             <span
               aria-label="Leaf emoji representing vegan lifestyle"
@@ -37,8 +45,8 @@ function CallToAction() {
             >
               🌱
             </span>
-          </Text>
-        </Heading>
+          </Heading>
+        </Box>
         <Text
           color={textColor}
           fontSize="sm"
