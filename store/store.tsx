@@ -30,17 +30,14 @@ const useIngredientStore = create<IngredientsStore>((set) => ({
       const requestBody = {
         model: "gpt-3.5-turbo",
         messages: [
-          { role: "system", content: "You are a vegan ingredient checker." },
           {
             role: "system",
             content:
-              "Please provide the vegan status of each ingredient separately, like this: [{ingredient: 'egg', vegan: false, reason: 'reason for being vegan or not here'}]",
+              "You are a vegan ingredient checker. Provide the vegan status of each ingredient separately in the following format: [{ ingredient: ingredientName, vegan: true/false, reason: 'reason for being vegan or not here, in a detailed description' }]",
           },
           {
             role: "user",
-            content: `Ingredients: ${ingredients
-              .map((ingredient) => ingredient)
-              .join(", ")}`,
+            content: `Ingredients: ${ingredients}`,
           },
         ],
       };
