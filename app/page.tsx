@@ -2,6 +2,8 @@
 
 import IngredientInput from "@/components/ui/ingredient-input";
 import useIngredientStore from "@/store/store";
+import { APIResponse } from "@/types/apiResponse";
+import { responseParse } from "@/utils/responseParser";
 import {
   useColorModeValue,
   Container,
@@ -17,15 +19,20 @@ export default function Home() {
   const textColor = useColorModeValue("gray.500", "gray.400");
   const buttonColorScheme = useColorModeValue("fernGreen", "hunterGreen");
 
-  const { setIngredients } = useIngredientStore();
+  const { ingredientList, setIngredients, fetchData, ingredientsInfoData } =
+    useIngredientStore();
 
-  const handleIngredientChange = (ingredients: string[]) => {
-    setIngredients(ingredients);
-    console.log(ingredients);
+  const handleIngredientChange = (ingredientList: string[]) => {
+    setIngredients(ingredientList);
   };
-  const handleSubmitIngredients = () => {
-    console.log("submitted.");
+  const handleSubmitIngredients = async () => {
+    await fetchData(ingredientList);
+    const ingredientInfo =
+      ingredientsInfoData && responseParse(ingredientsInfoData);
+    console.log(ingredientInfo);
   };
+
+  const btnDisabled = !ingredientList || ingredientList.length === 0;
 
   return (
     <Container maxW="4xl">
@@ -88,8 +95,10 @@ export default function Home() {
             color="white"
             _hover={{
               opacity: 0.9,
+              boxShadow: "md",
             }}
             aria-label="Check Ingredient Vegan Status"
+            isDisabled={btnDisabled}
             onClick={handleSubmitIngredients}
           >
             Check Ingredient Vegan Status

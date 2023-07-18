@@ -13,7 +13,9 @@ function IngredientInput({ onChange }: IngredientInputProps) {
 
   const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.target.value;
-    const ingredients = value.split(",").map((ingredient) => ingredient.trim());
+    const cleanedValue = value.replace(/\s+/g, " ").trim();
+
+    const ingredients = cleanedValue.split(/[,\/\n|;]/);
 
     onChange(ingredients);
   };
