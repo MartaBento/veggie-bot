@@ -1,23 +1,28 @@
 import { APIResponse } from "@/types/apiResponse";
+import { responseParse } from "@/utils/responseParser";
+import { isProductVegan } from "@/utils/veganAnalyser";
 import { create } from "zustand";
 
 interface IngredientsStore {
-  ingredientList: string[];
+  userInputIngredients: string[];
   error: boolean;
   loading: boolean;
-  setIngredients: (ingredients: string[]) => void;
+  productIsVegan: boolean | null;
+  setUserInputIngredients: (ingredients: string[]) => void;
   setError: (error: boolean) => void;
   setLoading: (loading: boolean) => void;
   fetchData: (ingredients: string[]) => Promise<void>;
-  ingredientsInfoData: APIResponse | null;
+  apiResponse: APIResponse | null;
 }
 
 const useIngredientStore = create<IngredientsStore>((set) => ({
-  ingredientList: [],
+  userInputIngredients: [],
   error: false,
   loading: false,
-  ingredientsInfoData: null,
-  setIngredients: (ingredients) => set({ ingredientList: ingredients }),
+  apiResponse: null,
+  productIsVegan: null,
+  setUserInputIngredients: (ingredients) =>
+    set({ userInputIngredients: ingredients }),
   setError: (error) => set({ error }),
   setLoading: (loading) => set({ loading }),
   fetchData: async (ingredients) => {
@@ -53,13 +58,19 @@ const useIngredientStore = create<IngredientsStore>((set) => ({
 
       if (response.ok) {
         const data = await response.json();
+        const ingredientInfo = responseParse(data);
+        const productIsVegan = isProductVegan(ingredientInfo);
 
-        set({ error: false, ingredientsInfoData: data });
+        set({
+          error: false,
+          apiResponse: data,
+          productIsVegan: productIsVegan,
+        });
       } else {
-        set({ error: true, ingredientsInfoData: null });
+        set({ error: true, apiResponse: null, productIsVegan: null });
       }
     } catch (error) {
-      set({ error: true, ingredientsInfoData: null });
+      set({ error: true, apiResponse: null, productIsVegan: null });
     } finally {
       set({ loading: false });
     }

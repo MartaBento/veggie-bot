@@ -2,8 +2,8 @@
 
 import IngredientInput from "@/components/ui/ingredient-input";
 import useIngredientStore from "@/store/store";
-import { APIResponse } from "@/types/apiResponse";
 import { responseParse } from "@/utils/responseParser";
+import { isProductVegan } from "@/utils/veganAnalyser";
 import {
   useColorModeValue,
   Container,
@@ -19,17 +19,18 @@ export default function Home() {
   const textColor = useColorModeValue("gray.500", "gray.400");
   const buttonColorScheme = useColorModeValue("fernGreen", "hunterGreen");
 
-  const { ingredientList, setIngredients, fetchData, ingredientsInfoData } =
-    useIngredientStore();
+  const {
+    userInputIngredients: ingredientList,
+    setUserInputIngredients: setIngredients,
+    fetchData,
+    apiResponse: ingredientsInfoData,
+  } = useIngredientStore();
 
   const handleIngredientChange = (ingredientList: string[]) => {
     setIngredients(ingredientList);
   };
   const handleSubmitIngredients = async () => {
     await fetchData(ingredientList);
-    const ingredientInfo =
-      ingredientsInfoData && responseParse(ingredientsInfoData);
-    console.log(ingredientInfo);
   };
 
   const btnDisabled = !ingredientList || ingredientList.length === 0;
