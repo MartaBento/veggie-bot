@@ -1,10 +1,22 @@
 import { Textarea, FormLabel, useColorModeValue, Box } from "@chakra-ui/react";
+import { ChangeEvent } from "react";
 
-function TextArea() {
+type IngredientInputProps = {
+  onChange: (ingredients: string[]) => void;
+};
+
+function IngredientInput({ onChange }: IngredientInputProps) {
   const placeholderColor = useColorModeValue("gray.500", "gray.400");
   const borderColor = useColorModeValue("hunterGreen", "sage");
   const backgroundColor = useColorModeValue("timberwolf", "gray.700");
   const textColor = useColorModeValue("brunswickGreen", "whiteAlpha.900");
+
+  const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    const value = event.target.value;
+    const ingredients = value.split(",").map((ingredient) => ingredient.trim());
+
+    onChange(ingredients);
+  };
 
   return (
     <Box>
@@ -41,9 +53,10 @@ function TextArea() {
         _hover={{
           borderColor: useColorModeValue("fernGreen", "whiteAlpha.600"),
         }}
+        onChange={handleInputChange}
       />
     </Box>
   );
 }
 
-export default TextArea;
+export default IngredientInput;
