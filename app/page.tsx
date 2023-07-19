@@ -2,8 +2,6 @@
 
 import IngredientInput from "@/components/ui/ingredient-input";
 import useIngredientStore from "@/store/store";
-import { responseParse } from "@/utils/responseParser";
-import { isProductVegan } from "@/utils/veganAnalyser";
 import {
   useColorModeValue,
   Container,
@@ -13,27 +11,33 @@ import {
   Box,
   Text,
 } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
+  const router = useRouter();
+
   const headingColor = useColorModeValue("brownish", "timberwolf");
   const textColor = useColorModeValue("gray.500", "gray.400");
   const buttonColorScheme = useColorModeValue("fernGreen", "hunterGreen");
 
-  const {
-    userInputIngredients: ingredientList,
-    setUserInputIngredients: setIngredients,
-    fetchData,
-    apiResponse: ingredientsInfoData,
-  } = useIngredientStore();
+  const { userInputIngredients, setUserInputIngredients, fetchData } =
+    useIngredientStore();
 
   const handleIngredientChange = (ingredientList: string[]) => {
-    setIngredients(ingredientList);
+    setUserInputIngredients(ingredientList);
   };
   const handleSubmitIngredients = async () => {
-    await fetchData(ingredientList);
+    try {
+      await fetchData(userInputIngredients);
+      router.push("/results");
+    } catch (error) {
+      console.error("Error occurred while fetching data:", error);
+    }
   };
 
-  const btnDisabled = !ingredientList || ingredientList.length === 0;
+  const btnDisabled =
+    !userInputIngredients || userInputIngredients.length === 0;
 
   return (
     <Container maxW="4xl">

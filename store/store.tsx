@@ -1,4 +1,4 @@
-import { APIResponse } from "@/types/apiResponse";
+import { APIResponse, IngredientInfo } from "@/types/apiResponse";
 import { responseParse } from "@/utils/responseParser";
 import { isProductVegan } from "@/utils/veganAnalyser";
 import { create } from "zustand";
@@ -13,6 +13,7 @@ interface IngredientsStore {
   setLoading: (loading: boolean) => void;
   fetchData: (ingredients: string[]) => Promise<void>;
   apiResponse: APIResponse | null;
+  ingredientInfo: IngredientInfo[] | null;
 }
 
 const useIngredientStore = create<IngredientsStore>((set) => ({
@@ -21,6 +22,7 @@ const useIngredientStore = create<IngredientsStore>((set) => ({
   loading: false,
   apiResponse: null,
   productIsVegan: null,
+  ingredientInfo: [],
   setUserInputIngredients: (ingredients) =>
     set({ userInputIngredients: ingredients }),
   setError: (error) => set({ error }),
@@ -65,12 +67,23 @@ const useIngredientStore = create<IngredientsStore>((set) => ({
           error: false,
           apiResponse: data,
           productIsVegan: productIsVegan,
+          ingredientInfo: ingredientInfo,
         });
       } else {
-        set({ error: true, apiResponse: null, productIsVegan: null });
+        set({
+          error: true,
+          apiResponse: null,
+          productIsVegan: null,
+          ingredientInfo: [],
+        });
       }
     } catch (error) {
-      set({ error: true, apiResponse: null, productIsVegan: null });
+      set({
+        error: true,
+        apiResponse: null,
+        productIsVegan: null,
+        ingredientInfo: [],
+      });
     } finally {
       set({ loading: false });
     }
