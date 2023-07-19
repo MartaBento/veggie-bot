@@ -3,7 +3,7 @@ import LeafIconHeader from "./leaf-icon-header";
 
 function MainHeading() {
   const headingColor = useColorModeValue("brownish", "timberwolf");
-  const textColor = useColorModeValue("gray.500", "gray.400");
+  const textColor = useColorModeValue("gray.600", "gray.300");
 
   return (
     <>

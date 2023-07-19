@@ -20,6 +20,7 @@ type ProvidersProps = {
 const colors = {
   timberwolf: "#DAD7CD",
   sage: "#A3B18A",
+  darkSage: "#859c66",
   fernGreen: "#588157",
   hunterGreen: "#3A5A40",
   brunswickGreen: "#344E41",
