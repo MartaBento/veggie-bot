@@ -42,13 +42,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ChakraProvider theme={theme}>
-      <html lang="en">
-        <body>
-          <Navbar />
-          <Component {...pageProps} />
-          <Footer />
-        </body>
-      </html>
+      <Navbar />
+      <Component {...pageProps} />
+      <Footer />
     </ChakraProvider>
   );
 }
