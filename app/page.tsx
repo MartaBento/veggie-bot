@@ -3,6 +3,7 @@
 import IngredientInput from "@/components/ui/ingredient-input";
 import MainHeading from "@/components/ui/main-heading";
 import useIngredientStore from "@/store/store";
+import { getRandomLoadingText } from "@/utils/loadingBtnRandomizer";
 import {
   useColorModeValue,
   Container,
@@ -17,8 +18,12 @@ export default function Home() {
 
   const buttonColorScheme = useColorModeValue("fernGreen", "hunterGreen");
 
-  const { userInputIngredients, setUserInputIngredients, fetchData } =
-    useIngredientStore();
+  const {
+    userInputIngredients,
+    setUserInputIngredients,
+    fetchData,
+    isLoading,
+  } = useIngredientStore();
 
   const handleIngredientChange = (ingredientList: string[]) => {
     setUserInputIngredients(ingredientList);
@@ -34,6 +39,8 @@ export default function Home() {
 
   const btnDisabled =
     !userInputIngredients || userInputIngredients.length === 0;
+
+  const loadingBtnText = getRandomLoadingText();
 
   return (
     <Container maxW="4xl">
@@ -65,6 +72,8 @@ export default function Home() {
             aria-label="Check Ingredient Vegan Status"
             isDisabled={btnDisabled}
             onClick={handleSubmitIngredients}
+            isLoading={isLoading}
+            loadingText={loadingBtnText}
           >
             Check Ingredient Vegan Status
           </Button>

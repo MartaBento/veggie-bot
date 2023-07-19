@@ -12,6 +12,7 @@ import {
   Text,
   Box,
   Heading,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { LuVegan } from "react-icons/lu";
 import { MdDoNotDisturbOn } from "react-icons/md";
@@ -20,6 +21,7 @@ export default function Results() {
   const { ingredientInfo, productIsVegan } = useIngredientStore();
   const badgeColor =
     productIsVegan === null ? "gray" : productIsVegan ? "green" : "red";
+  const textColor = useColorModeValue("gray.800", "gray.900");
 
   const renderBadge = () => (
     <Badge variant="solid" colorScheme={badgeColor}>
@@ -63,13 +65,17 @@ export default function Results() {
                   marginY="auto"
                 />
                 <VStack spacing={0} align="start">
-                  <Text fontSize="sm" fontWeight="semibold">
+                  <Text fontSize="sm" fontWeight="semibold" color={textColor}>
                     {ingredient.ingredientName}
                   </Text>
-                  <Text fontSize="xs">{ingredient.reason}</Text>
+                  <Text fontSize="xs" color={textColor}>
+                    {ingredient.reason}
+                  </Text>
                 </VStack>
               </HStack>
-              {index !== ingredientInfo.length - 1 && <Divider my={2} />}
+              {index !== ingredientInfo.length - 1 && (
+                <Divider my={2} borderColor="gray.300" />
+              )}
             </ListItem>
           ))}
         </List>

@@ -7,7 +7,7 @@ type IngredientInputProps = {
 
 function IngredientInput({ onChange }: IngredientInputProps) {
   const placeholderColor = useColorModeValue("gray.500", "gray.400");
-  const borderColor = useColorModeValue("hunterGreen", "sage");
+  const borderColor = useColorModeValue("darkSage", "sage");
   const backgroundColor = useColorModeValue("timberwolf", "gray.700");
   const textColor = useColorModeValue("brunswickGreen", "whiteAlpha.900");
 
@@ -33,7 +33,7 @@ function IngredientInput({ onChange }: IngredientInputProps) {
       </FormLabel>
       <Textarea
         id="ingredients"
-        placeholder="Separated by commas (e.g., egg, onion, tomato, cheese, pasta...)"
+        placeholder="Enter ingredients separated by commas (e.g., egg, onion, tomato, cheese, pasta...)"
         size="lg"
         borderWidth="1px"
         borderColor={borderColor}
@@ -47,7 +47,7 @@ function IngredientInput({ onChange }: IngredientInputProps) {
         borderRadius="md"
         p={4}
         color={textColor}
-        shadow="md"
+        shadow="lg"
         _focus={{
           borderColor: useColorModeValue("sage", "whiteAlpha.600"),
           shadow: "outline",

@@ -11,16 +11,17 @@ import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 function Footer() {
   return (
-    <Container as="footer" role="contentinfo" maxW="4xl">
+    <Container as="footer" role="contentinfo" maxW="4xl" marginTop={10}>
       <Stack spacing={{ base: "2", md: "4" }} textAlign="center" fontSize="xs">
         <Text>&copy; {new Date().getFullYear()} Marta B.</Text>
         <Text marginTop={2}>
-          Veggie Bot Disclaimer: Use the information provided by Veggie Bot as a
-          helpful tool, but always verify ingredient vegan status through
-          reliable sources. Consult with a professional for dietary concerns.
-          Veggie Bot is not liable for decisions or actions based on the
-          provided information. Use your own judgment and discretion for
-          veganism and dietary choices.
+          Veggie Bot Disclaimer: Please consider the information provided by
+          Veggie Bot as a helpful tool, but always verify the vegan status of
+          ingredients through reliable sources. It&apos;s recommended to consult
+          with a professional for dietary concerns. Veggie Bot assumes no
+          liability for decisions or actions based on the provided information.
+          Use your own judgment and discretion when making veganism and dietary
+          choices.
         </Text>
       </Stack>
       <Stack justify="center" direction="row" align="center" marginTop={6}>

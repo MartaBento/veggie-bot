@@ -15,7 +15,7 @@ function MainHeading() {
           lineHeight="100%"
           marginBottom="-3"
         >
-          Discover the power of AI
+          Discover the Power of AI
         </Heading>
         <Heading
           color={headingColor}
@@ -23,7 +23,7 @@ function MainHeading() {
           as="h2"
           fontSize={{ base: "2xl", md: "6xl", sm: "4xl" }}
         >
-          <span aria-hidden="true">in your vegan journey </span>
+          <span aria-hidden="true">In Your Vegan Journey </span>
           <LeafIconHeader />
         </Heading>
       </Box>
@@ -34,9 +34,10 @@ function MainHeading() {
         mx="auto"
         textAlign="center"
       >
-        Take the guesswork out of your plant-based lifestyle. Discover the vegan
-        status of ingredients instantly with Veggie Bot, empowering you to make
-        conscious choices and lead a cruelty-free and sustainable way of living.
+        Eliminate the guesswork in your plant-based lifestyle. Discover the
+        vegan status of ingredients instantly with Veggie Bot, empowering you to
+        make informed choices and lead a cruelty-free and sustainable way of
+        living.
       </Text>
     </>
   );
