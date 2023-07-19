@@ -3,8 +3,8 @@ import "@fontsource/open-sans/700.css";
 import "@fontsource/inter/400.css";
 import "@fontsource/league-spartan/900.css";
 import { AppProps } from "next/app";
-import Footer from "@/components/ui/footer";
-import Navbar from "@/components/ui/navbar";
+import Footer from "@/components/common/footer";
+import Navbar from "@/components/common/navbar";
 
 function MyApp({ Component, pageProps }: AppProps) {
   // Palette: https://coolors.co/dad7cd-a3b18a-588157-3a5a40-344e41

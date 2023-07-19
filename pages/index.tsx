@@ -1,5 +1,5 @@
-import IngredientInput from "@/components/ui/ingredient-input";
-import MainHeading from "@/components/ui/main-heading";
+import IngredientInput from "@/components/ingredient-input";
+import MainHeading from "@/components/main-heading";
 import useIngredientStore from "@/store/store";
 import { getRandomLoadingText } from "@/utils/loadingBtnRandomizer";
 import {

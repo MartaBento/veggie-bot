@@ -14,8 +14,7 @@ import {
 import { LuVegan } from "react-icons/lu";
 import { MdDoNotDisturbOn } from "react-icons/md";
 
-import BackButton from "@/components/ui/back-btn";
-import VeganStatusBadge from "@/components/ui/vegan-status-badge";
+import BackButton from "@/components/back-btn";
 import { useRouter } from "next/router";
 import { IngredientInfo } from "@/types/apiResponse";
 import { responseParse } from "@/utils/responseParser";
@@ -23,6 +22,7 @@ import { isProductVegan } from "@/utils/veganAnalyser";
 import { GetServerSidePropsContext } from "next";
 import { apiURL } from "@/constants/url";
 import useIngredientStore from "@/store/store";
+import VeganStatusBadge from "@/components/vegan-status-badge";
 
 type ResultsPageProps = {
   ingredientInfo: IngredientInfo[];
