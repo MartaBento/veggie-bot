@@ -1,8 +1,9 @@
 "use client";
 
+import BackButton from "@/components/ui/back-btn";
+import VeganStatusBadge from "@/components/ui/vegan-status-badge";
 import useIngredientStore from "@/store/store";
 import {
-  Badge,
   Divider,
   List,
   ListIcon,
@@ -13,38 +14,35 @@ import {
   Box,
   Heading,
   useColorModeValue,
+  Center,
 } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 import { LuVegan } from "react-icons/lu";
 import { MdDoNotDisturbOn } from "react-icons/md";
 
 export default function Results() {
   const { ingredientInfo, productIsVegan } = useIngredientStore();
-  const badgeColor =
-    productIsVegan === null ? "gray" : productIsVegan ? "green" : "red";
+  const router = useRouter();
   const textColor = useColorModeValue("gray.800", "gray.900");
 
-  const renderBadge = () => (
-    <Badge variant="solid" colorScheme={badgeColor}>
-      {productIsVegan === true
-        ? "vegan"
-        : productIsVegan === false
-        ? "not vegan"
-        : "unknown"}
-    </Badge>
-  );
+  const handleClickBackBtn = () => {
+    router.push("/");
+  };
 
   return (
     <VStack align="center" spacing={4} minHeight="100vh">
-      <Heading
-        as="h1"
-        fontWeight={600}
-        fontSize={{ base: "lg", md: "4xl", sm: "xl" }}
-        lineHeight="100%"
-        marginTop="12"
-      >
-        Ingredient Analysis
-      </Heading>
-      {renderBadge()}
+      <Center marginTop="12">
+        <BackButton onClick={handleClickBackBtn} />
+        <Heading
+          as="h1"
+          fontWeight={600}
+          fontSize={{ base: "lg", md: "4xl", sm: "xl" }}
+          lineHeight="100%"
+        >
+          Ingredient Analysis
+        </Heading>
+      </Center>
+      <VeganStatusBadge productIsVegan={productIsVegan} />
       <Box
         borderWidth="1px"
         borderStyle="solid"
