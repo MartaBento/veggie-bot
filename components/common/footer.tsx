@@ -8,10 +8,18 @@ import {
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <Container as="footer" role="contentinfo" maxW="4xl" marginTop={10}>
+    <Container
+      as="footer"
+      role="contentinfo"
+      maxW="4xl"
+      marginTop={10}
+      fontFamily="Nunito"
+    >
       <Stack spacing={{ base: "2", md: "4" }} textAlign="center" fontSize="xs">
-        <Text>&copy; {new Date().getFullYear()} Marta B.</Text>
+        <Text>&copy; {currentYear} Marta B.</Text>
         <Text marginTop={2}>
           Veggie Bot Disclaimer: Please consider the information provided by
           Veggie Bot as a helpful tool, but always verify the vegan status of

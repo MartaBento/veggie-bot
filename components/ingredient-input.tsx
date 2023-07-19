@@ -7,16 +7,14 @@ type IngredientInputProps = {
 
 function IngredientInput({ onChange }: IngredientInputProps) {
   const placeholderColor = useColorModeValue("gray.500", "gray.400");
-  const borderColor = useColorModeValue("darkSage", "sage");
-  const backgroundColor = useColorModeValue("timberwolf", "gray.700");
-  const textColor = useColorModeValue("brunswickGreen", "whiteAlpha.900");
+  const borderColor = useColorModeValue("#859c66", "#A3B18A");
+  const backgroundColor = useColorModeValue("#DAD7CD", "gray.700");
+  const textColor = useColorModeValue("#344E41", "whiteAlpha.900");
 
   const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.target.value;
     const cleanedValue = value.replace(/\s+/g, " ").trim();
-
     const ingredients = cleanedValue.split(/[,\/\n|;]/);
-
     onChange(ingredients);
   };
 
@@ -28,8 +26,9 @@ function IngredientInput({ onChange }: IngredientInputProps) {
         fontWeight="bold"
         mb={1}
         color={useColorModeValue("gray.700", "gray.200")}
+        fontFamily="Lato"
       >
-        Enter the list of ingredients, separated by a comma:
+        Product ingredients:
       </FormLabel>
       <Textarea
         id="ingredients"
@@ -49,13 +48,14 @@ function IngredientInput({ onChange }: IngredientInputProps) {
         color={textColor}
         shadow="lg"
         _focus={{
-          borderColor: useColorModeValue("sage", "whiteAlpha.600"),
+          borderColor: useColorModeValue("#A3B18A", "whiteAlpha.600"),
           shadow: "outline",
         }}
         _hover={{
-          borderColor: useColorModeValue("fernGreen", "whiteAlpha.600"),
+          borderColor: useColorModeValue("#588157", "whiteAlpha.600"),
         }}
         onChange={handleInputChange}
+        fontFamily="Nunito"
       />
     </Box>
   );

@@ -22,6 +22,8 @@ import { isProductVegan } from "@/utils/veganAnalyser";
 import { GetServerSidePropsContext } from "next";
 import { apiURL } from "@/constants/url";
 import VeganStatusBadge from "@/components/vegan-status-badge";
+import Head from "next/head";
+import { metadata } from "@/constants/metadata";
 
 type ResultsPageProps = {
   ingredientInfo: IngredientInfo[];
@@ -40,55 +42,73 @@ export default function ResultsPage({
   };
 
   return (
-    <VStack align="center" spacing={4} minHeight="100vh">
-      <Center marginTop="12">
-        <BackButton onClick={handleClickBackBtn} />
-        <Heading
-          as="h1"
-          fontWeight={600}
-          fontSize={{ base: "lg", md: "4xl", sm: "xl" }}
-          lineHeight="100%"
+    <>
+      <Head>
+        <title>{metadata.title.template.replace("%s", "Results")}</title>
+        <meta name="description" content={metadata.description} />
+        <link rel="icon" href={metadata.icons.icon} />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href={metadata.icons.shortcut}
+        />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href={metadata.icons.shortcut}
+        />
+      </Head>
+      <VStack align="center" spacing={4} minHeight="100vh">
+        <Center marginTop="12">
+          <BackButton onClick={handleClickBackBtn} />
+          <Heading
+            as="h1"
+            fontWeight={600}
+            fontSize={{ base: "lg", md: "4xl", sm: "xl" }}
+            lineHeight="100%"
+          >
+            Ingredient Analysis
+          </Heading>
+        </Center>
+        <VeganStatusBadge productIsVegan={productIsVegan} />
+        <Box
+          borderWidth="1px"
+          borderStyle="solid"
+          borderColor="gray.300"
+          borderRadius="md"
+          p={6}
+          boxShadow="sm"
+          bg="gray.50"
+          maxW="4xl"
         >
-          Ingredient Analysis
-        </Heading>
-      </Center>
-      <VeganStatusBadge productIsVegan={productIsVegan} />
-      <Box
-        borderWidth="1px"
-        borderStyle="solid"
-        borderColor="gray.300"
-        borderRadius="md"
-        p={6}
-        boxShadow="sm"
-        bg="gray.50"
-        maxW="4xl"
-      >
-        <List spacing={3} fontSize="xs">
-          {ingredientInfo?.map((ingredient, index) => (
-            <ListItem key={ingredient.ingredientName}>
-              <HStack spacing={3} align="middle">
-                <ListIcon
-                  as={ingredient.vegan ? LuVegan : MdDoNotDisturbOn}
-                  color={ingredient.vegan ? "green" : "red"}
-                  marginY="auto"
-                />
-                <VStack spacing={0} align="start">
-                  <Text fontSize="sm" fontWeight="semibold" color={textColor}>
-                    {ingredient.ingredientName}
-                  </Text>
-                  <Text fontSize="xs" color={textColor}>
-                    {ingredient.reason}
-                  </Text>
-                </VStack>
-              </HStack>
-              {index !== ingredientInfo.length - 1 && (
-                <Divider my={2} borderColor="gray.300" />
-              )}
-            </ListItem>
-          ))}
-        </List>
-      </Box>
-    </VStack>
+          <List spacing={3} fontSize="xs">
+            {ingredientInfo?.map((ingredient, index) => (
+              <ListItem key={ingredient.ingredientName}>
+                <HStack spacing={3} align="middle">
+                  <ListIcon
+                    as={ingredient.vegan ? LuVegan : MdDoNotDisturbOn}
+                    color={ingredient.vegan ? "green" : "red"}
+                    marginY="auto"
+                  />
+                  <VStack spacing={0} align="start">
+                    <Text fontSize="sm" fontWeight="semibold" color={textColor}>
+                      {ingredient.ingredientName}
+                    </Text>
+                    <Text fontSize="xs" color={textColor}>
+                      {ingredient.reason}
+                    </Text>
+                  </VStack>
+                </HStack>
+                {index !== ingredientInfo.length - 1 && (
+                  <Divider my={2} borderColor="gray.300" />
+                )}
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </VStack>
+    </>
   );
 }
 
@@ -128,8 +148,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       const data = await response.json();
       const ingredientInfo = responseParse(data);
       const productIsVegan = isProductVegan(ingredientInfo);
-
-      console.log(ingredientInfo, productIsVegan);
 
       return {
         props: {

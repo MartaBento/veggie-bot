@@ -2,7 +2,6 @@ import { APIResponse, IngredientInfo } from "@/types/apiResponse";
 
 export function responseParse(response: APIResponse): IngredientInfo[] {
   const content = response.choices[0].message.content;
-  console.log("content", content);
 
   const ingredientRegex =
     /{ ingredient: '(.*?)', vegan: (.*?), reason: '(.*?)' }/g;

@@ -1,7 +1,10 @@
 import { ChakraProvider, ThemeConfig, extendTheme } from "@chakra-ui/react";
-import "@fontsource/open-sans/700.css";
-import "@fontsource/inter/400.css";
-import "@fontsource/league-spartan/900.css";
+import "@fontsource/open-sans";
+import "@fontsource/inter";
+import "@fontsource/league-spartan";
+import "@fontsource/montserrat";
+import "@fontsource/nunito";
+import "@fontsource/lato";
 import { AppProps } from "next/app";
 import Footer from "@/components/common/footer";
 import Navbar from "@/components/common/navbar";
