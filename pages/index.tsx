@@ -1,5 +1,3 @@
-"use client";
-
 import IngredientInput from "@/components/ui/ingredient-input";
 import MainHeading from "@/components/ui/main-heading";
 import useIngredientStore from "@/store/store";
@@ -18,22 +16,17 @@ export default function Home() {
 
   const buttonColorScheme = useColorModeValue("fernGreen", "hunterGreen");
 
-  const {
-    userInputIngredients,
-    setUserInputIngredients,
-    fetchData,
-    isLoading,
-  } = useIngredientStore();
+  const { userInputIngredients, setUserInputIngredients, isLoading } =
+    useIngredientStore();
 
   const handleIngredientChange = (ingredientList: string[]) => {
     setUserInputIngredients(ingredientList);
   };
   const handleSubmitIngredients = async () => {
     try {
-      await fetchData(userInputIngredients);
       router.push("/results");
     } catch (error) {
-      console.error("Error occurred while fetching data:", error);
+      console.error("Error occurred while navigating to results page:", error);
     }
   };
 
