@@ -38,6 +38,7 @@ export default function Results() {
         fontWeight={600}
         fontSize={{ base: "lg", md: "4xl", sm: "xl" }}
         lineHeight="100%"
+        marginTop="12"
       >
         Ingredient Analysis
       </Heading>
