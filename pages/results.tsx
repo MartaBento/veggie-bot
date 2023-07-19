@@ -21,7 +21,6 @@ import { responseParse } from "@/utils/responseParser";
 import { isProductVegan } from "@/utils/veganAnalyser";
 import { GetServerSidePropsContext } from "next";
 import { apiURL } from "@/constants/url";
-import useIngredientStore from "@/store/store";
 import VeganStatusBadge from "@/components/vegan-status-badge";
 
 type ResultsPageProps = {
@@ -94,7 +93,8 @@ export default function ResultsPage({
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const ingredients = useIngredientStore.getState().userInputIngredients;
+  const { query } = context;
+  const { ingredients } = query;
 
   try {
     const apiKey = process.env.NEXT_PUBLIC_OPENAI_KEY;
@@ -128,6 +128,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       const data = await response.json();
       const ingredientInfo = responseParse(data);
       const productIsVegan = isProductVegan(ingredientInfo);
+
+      console.log(ingredientInfo, productIsVegan);
 
       return {
         props: {

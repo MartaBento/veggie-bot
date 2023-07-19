@@ -1,6 +1,5 @@
 import IngredientInput from "@/components/ingredient-input";
 import MainHeading from "@/components/main-heading";
-import useIngredientStore from "@/store/store";
 import { getRandomLoadingText } from "@/utils/loadingBtnRandomizer";
 import {
   useColorModeValue,
@@ -9,30 +8,37 @@ import {
   Button,
   Box,
 } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function Home() {
   const router = useRouter();
 
   const buttonColorScheme = useColorModeValue("fernGreen", "hunterGreen");
 
-  const { userInputIngredients, setUserInputIngredients, isLoading } =
-    useIngredientStore();
+  const [userInputIngredients, setUserInputIngredients] = useState<string[]>(
+    []
+  );
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleIngredientChange = (ingredientList: string[]) => {
     setUserInputIngredients(ingredientList);
   };
+
   const handleSubmitIngredients = async () => {
     try {
-      router.push("/results");
+      setIsLoading(true);
+      const queryParams = userInputIngredients.join(",");
+      router.push(`/results?ingredients=${queryParams}`);
     } catch (error) {
       console.error("Error occurred while navigating to results page:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const btnDisabled =
     !userInputIngredients || userInputIngredients.length === 0;
-
   const loadingBtnText = getRandomLoadingText();
 
   return (
