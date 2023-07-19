@@ -16,7 +16,7 @@ function MainHeading() {
           letterSpacing="tight"
           fontFamily="Montserrat"
           color="#344E41"
-          marginBottom="-3"
+          marginBottom="-2"
         >
           Discover the Power of AI
         </Heading>

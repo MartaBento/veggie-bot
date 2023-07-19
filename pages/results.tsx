@@ -142,7 +142,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         {
           role: "system",
           content:
-            "You are a vegan ingredient checker. Provide the vegan status of each ingredient separately in the following format: [{ ingredient: ingredientName, vegan: true/false, reason: 'reason for being vegan or not here, in a detailed description. if the user inputs an ingredient that is not English, please find a way to translate the name of the ingredient here, in a natural way' }]",
+            "You are a vegan ingredient checker. Provide the vegan status of each ingredient separately in JSON format: [{ ingredient: ingredientName, vegan: true/false, reason: 'reason for being vegan or not here, in a detailed description. if the user inputs an ingredient that is not English, please find a way to translate the name of the ingredient here, in a natural way' }]",
         },
         {
           role: "user",
@@ -164,7 +164,9 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     if (response.ok) {
       const data = await response.json();
       const ingredientInfo = responseParse(data);
-      const productIsVegan = isProductVegan(ingredientInfo);
+      const productIsVegan = !ingredientInfo
+        ? null
+        : isProductVegan(ingredientInfo);
 
       return {
         props: {
