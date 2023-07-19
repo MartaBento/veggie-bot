@@ -59,17 +59,33 @@ export default function ResultsPage({
           href={metadata.icons.shortcut}
         />
       </Head>
-      <VStack align="center" spacing={4} minHeight="100vh">
-        <Center marginTop="12">
-          <BackButton onClick={handleClickBackBtn} />
-          <Heading
-            as="h1"
-            fontWeight={600}
-            fontSize={{ base: "lg", md: "4xl", sm: "xl" }}
-            lineHeight="100%"
-          >
-            Ingredient Analysis
-          </Heading>
+      <VStack align="center" spacing={4}>
+        <Center marginTop="6">
+          <VStack>
+            <BackButton onClick={handleClickBackBtn} />
+            <Heading
+              as="h1"
+              fontWeight={600}
+              fontSize={{ base: "2xl", md: "6xl", sm: "4xl" }}
+              lineHeight="100%"
+              letterSpacing="tight"
+              fontFamily="Lato"
+              color={useColorModeValue("#344E41", "#DAD7CD")}
+            >
+              Ingredient Analysis
+            </Heading>
+            <Text
+              fontSize="xl"
+              color={useColorModeValue("gray.600", "gray.300")}
+              mt={2}
+              maxWidth="xl"
+              textAlign="center"
+              fontFamily="Nunito"
+            >
+              Veggie Bot has analyzed the vegan status of each ingredient and
+              provided the reasons behind it. Here are the results:
+            </Text>
+          </VStack>
         </Center>
         <VeganStatusBadge productIsVegan={productIsVegan} />
         <Box
@@ -78,7 +94,7 @@ export default function ResultsPage({
           borderColor="gray.300"
           borderRadius="md"
           p={6}
-          boxShadow="sm"
+          boxShadow="lg"
           bg="gray.50"
           maxW="4xl"
         >
@@ -93,7 +109,8 @@ export default function ResultsPage({
                   />
                   <VStack spacing={0} align="start">
                     <Text fontSize="sm" fontWeight="semibold" color={textColor}>
-                      {ingredient.ingredientName}
+                      {ingredient.ingredientName.charAt(0).toUpperCase() +
+                        ingredient.ingredientName.slice(1)}
                     </Text>
                     <Text fontSize="xs" color={textColor}>
                       {ingredient.reason}
