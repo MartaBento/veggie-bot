@@ -19,6 +19,7 @@ import { MdDoNotDisturbOn } from "react-icons/md";
 type IngredientInfoProps = {
   ingredientInfo: IngredientInfo[];
 };
+
 function IngredientInfoList({ ingredientInfo }: IngredientInfoProps) {
   const textColor = useColorModeValue("gray.800", "gray.900");
   const buttonColorScheme = useColorModeValue("sage", "fernGreen");
@@ -50,9 +51,10 @@ function IngredientInfoList({ ingredientInfo }: IngredientInfoProps) {
         p={6}
         boxShadow="lg"
         bg="gray.50"
-        maxW="4xl"
+        ml={{ base: 6 }}
+        mr={{ base: 6 }}
       >
-        <List spacing={3} fontSize="xs" w="400px" h="auto">
+        <List spacing={3} fontSize={{ base: "xs", md: "sm" }}>
           {currentIngredients?.map((ingredient, index) => (
             <ListItem
               key={ingredient.ingredientName}
@@ -68,11 +70,15 @@ function IngredientInfoList({ ingredientInfo }: IngredientInfoProps) {
                   h="16px"
                 />
                 <VStack spacing={0} align="start" flex="1">
-                  <Text fontSize="sm" fontWeight="semibold" color={textColor}>
+                  <Text
+                    fontSize={{ base: "xs", md: "sm" }}
+                    fontWeight="semibold"
+                    color={textColor}
+                  >
                     {ingredient.ingredientName.charAt(0).toUpperCase() +
                       ingredient.ingredientName.slice(1)}
                   </Text>
-                  <Text fontSize="xs" color={textColor}>
+                  <Text fontSize={{ base: "xs", md: "sm" }} color={textColor}>
                     {ingredient.reason}
                   </Text>
                 </VStack>

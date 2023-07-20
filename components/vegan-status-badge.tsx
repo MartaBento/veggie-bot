@@ -22,8 +22,8 @@ function VeganStatusBadge({ productIsVegan }: VeganStatusBadgeProps) {
       fontWeight="bold"
       textTransform="uppercase"
       fontSize={{ base: "xs", md: "sm" }}
-      px={{ base: 1, md: 3 }}
-      py={{ base: 1, md: 2 }}
+      px={{ base: 2, md: 3 }}
+      py={{ base: 2, md: 2 }}
       letterSpacing="wider"
       marginTop={2}
       marginBottom={6}
