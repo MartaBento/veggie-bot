@@ -1,11 +1,11 @@
 export function getRandomLoadingText(): string {
   const loadingTexts: string[] = [
-    "Whipping up a veggielicious analysis...",
+    "Cooking up a veggie analysis...",
     "Chopping veggies and crunching data...",
-    "Assembling the vegan knowledge, one ingredient at a time...",
-    "Simmering the data to serve you the perfect vegan verdict...",
-    "Our vegan robots are crunching numbers... and carrots!",
-    "Unleashing the power of plant-based AI... please hold your kale!",
+    "Assembling vegan knowledge...",
+    "Simmering data for the perfect verdict...",
+    "Our vegan bots are crunching numbers...",
+    "Unleashing plant-based AI...",
   ];
 
   const randomIndex = Math.floor(Math.random() * loadingTexts.length);

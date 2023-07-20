@@ -75,6 +75,7 @@ export default function Home() {
             align="center"
             alignSelf="center"
             position="relative"
+            mt={{ base: "12", md: "0" }}
           >
             <Button
               colorScheme={buttonColorScheme}
@@ -92,7 +93,9 @@ export default function Home() {
               loadingText={loadingBtnText}
               fontFamily="Nunito"
               fontWeight="bold"
-              fontSize="sm"
+              fontSize={{ base: "xs", md: "sm" }}
+              w={{ base: "full", md: "auto" }}
+              padding={isLoading ? "6px 24px" : "12px 24px"}
             >
               Check Ingredient Vegan Status
             </Button>

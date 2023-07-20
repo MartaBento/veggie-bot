@@ -52,7 +52,7 @@ function IngredientInfoList({ ingredientInfo }: IngredientInfoProps) {
         bg="gray.50"
         maxW="4xl"
       >
-        <List spacing={3} fontSize="xs" w="400px" h="300px">
+        <List spacing={3} fontSize="xs" w="400px" h="auto">
           {currentIngredients?.map((ingredient, index) => (
             <ListItem
               key={ingredient.ingredientName}

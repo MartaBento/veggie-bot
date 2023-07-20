@@ -7,16 +7,16 @@ function MainHeading() {
 
   return (
     <>
-      <Box>
+      <Box mt={{ base: "20px", md: "0" }}>
         <Heading
           as="h1"
           fontWeight={600}
-          fontSize={{ base: "xl", md: "6xl", sm: "2xl" }}
+          fontSize={{ base: "3xl", md: "6xl", sm: "2xl" }}
           lineHeight="100%"
           letterSpacing="tight"
           fontFamily="Montserrat"
           color="#344E41"
-          marginBottom="-2"
+          marginBottom={{ base: "-1", md: "-2" }}
         >
           Discover the Power of AI
         </Heading>
@@ -24,7 +24,7 @@ function MainHeading() {
           color={headingColor}
           fontWeight={600}
           as="h2"
-          fontSize={{ base: "2xl", md: "6xl", sm: "4xl" }}
+          fontSize={{ base: "3xl", md: "6xl", sm: "4xl" }}
           lineHeight="100%"
           letterSpacing="tight"
           fontFamily="Lato"
@@ -35,11 +35,16 @@ function MainHeading() {
       </Box>
       <Text
         color={textColor}
-        fontSize="sm"
+        fontSize={{ base: "md", md: "sm" }}
         maxW="600px"
         mx="auto"
         textAlign="center"
         fontFamily="Nunito"
+        mt={{ base: "12px", md: "20px" }}
+        lineHeight={{
+          base: "tall",
+          md: "normal",
+        }}
       >
         Eliminate the guesswork in your plant-based lifestyle. Discover the
         vegan status of ingredients instantly with Veggie Bot, empowering you to

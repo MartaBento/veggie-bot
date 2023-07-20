@@ -45,7 +45,7 @@ export default function ResultsPage({
           href={metadata.icons.shortcut}
         />
       </Head>
-      <VStack align="center" spacing={4}>
+      <VStack align="center" spacing={3}>
         <Center marginTop="6">
           <VStack>
             <BackButton onClick={handleClickBackBtn} />

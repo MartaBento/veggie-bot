@@ -22,7 +22,7 @@ function IngredientInput({ onChange }: IngredientInputProps) {
     <Box>
       <FormLabel
         htmlFor="ingredients"
-        fontSize="xs"
+        fontSize={{ base: "xs", md: "sm" }} // Adjust font size for mobile
         fontWeight="bold"
         mb={1}
         color={useColorModeValue("gray.700", "gray.200")}
@@ -41,10 +41,10 @@ function IngredientInput({ onChange }: IngredientInputProps) {
           color: placeholderColor,
         }}
         resize="none"
-        fontSize="sm"
+        fontSize={{ base: "sm", md: "md" }}
         bg={backgroundColor}
         borderRadius="md"
-        p={4}
+        p={{ base: 2, md: 4 }}
         color={textColor}
         shadow="lg"
         _focus={{
