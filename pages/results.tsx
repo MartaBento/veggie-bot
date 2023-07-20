@@ -35,18 +35,7 @@ export default function ResultsPage({
       <Head>
         <title>{metadata.title.template.replace("%s", "Results")}</title>
         <meta name="description" content={metadata.description} />
-        <link rel="icon" href={metadata.icons.icon} />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href={metadata.icons.shortcut}
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href={metadata.icons.shortcut}
-        />
+        <link rel="manifest" href="/manifest.json" />
       </Head>
       {errorMessage && <ErrorMessage />}
       {!errorMessage && (
