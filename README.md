@@ -1,34 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# VeggieBot 🌱
 
-## Getting Started
+VeggieBot is a web application that helps you discover the vegan status of ingredients instantly. It empowers you to make informed choices and lead a cruelty-free and sustainable way of living.
 
-First, run the development server:
+![VeggieBot Logo Desktop Dark](public/veggie-bot-mobile.png)
+![VeggieBot Logo Mobile Light](public/veggie-bot-desktop.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Instantly check the vegan status of ingredients;
+- User-friendly and accessible interface;
+- Light/Dark mode;
+- Mobile friendly.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [Chakra UI](https://chakra-ui.com/): For building the user interface with style and accessibility in mind.
+- [Next.js](https://nextjs.org/): For server-side rendering and creating a fast and efficient web app.
+- [React](https://reactjs.org/): To build the front-end user interface components.
+- [Open AI GPT-3.5](https://platform.openai.com/docs/api-reference): For generating vegan status of ingredients.
 
-## Learn More
+## Installation
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the repository: `git clone https://github.com/MartaBento/veggie-bot.git`
+2. Install dependencies: `npm install`
+3. Run the development server: `npm run dev`
+4. Open your browser and go to `http://localhost:3000` to see VeggieBot in action.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Usage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. Choose the product to analyse and copy its ingredient list;
+2. Paste the ingredient list into the input field and click the Analyze button;
+3. Wait for the results to be displayed in the `results` page.
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Contributions are welcome! If you find any issues or want to add new features, please open an issue or submit a pull request.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contact
+
+Connect with me on LinkedIn or GitHub for any questions or discussions related to VeggieBot:
+
+- [LinkedIn](https://www.linkedin.com/in/marta-bento)
+- [GitHub](https://github.com/MartaBento)

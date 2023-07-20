@@ -8,6 +8,7 @@ import "@fontsource/lato";
 import { AppProps } from "next/app";
 import Footer from "@/components/common/footer";
 import Navbar from "@/components/common/navbar";
+import { Analytics } from "@vercel/analytics/react";
 
 function VeggieBot({ Component, pageProps }: AppProps) {
   // Palette: https://coolors.co/dad7cd-a3b18a-588157-3a5a40-344e41
@@ -47,6 +48,7 @@ function VeggieBot({ Component, pageProps }: AppProps) {
     <ChakraProvider theme={theme}>
       <Navbar />
       <Component {...pageProps} />
+      <Analytics />
       <Footer />
     </ChakraProvider>
   );
