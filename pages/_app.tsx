@@ -11,7 +11,6 @@ import Navbar from "@/components/common/navbar";
 import { Analytics } from "@vercel/analytics/react";
 
 function VeggieBot({ Component, pageProps }: AppProps) {
-  // Palette: https://coolors.co/dad7cd-a3b18a-588157-3a5a40-344e41
   const colors = {
     timberwolf: "#DAD7CD",
     sage: "#A3B18A",
