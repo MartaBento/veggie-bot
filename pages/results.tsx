@@ -11,21 +11,28 @@ import Head from "next/head";
 import { metadata } from "@/constants/metadata";
 import ResultsHeading from "@/components/results-page/results-heading";
 import IngredientInfoList from "@/components/results-page/ingredient-info-list";
+import ErrorMessage from "@/components/results-page/error";
 
 type ResultsPageProps = {
   ingredientInfo: IngredientInfo[];
   productIsVegan: boolean | null;
+  errorMessage: string | null;
 };
 
 export default function ResultsPage({
   ingredientInfo,
   productIsVegan,
+  errorMessage,
 }: ResultsPageProps) {
   const router = useRouter();
 
   const handleClickBackBtn = () => {
     router.push("/");
   };
+
+  if (!errorMessage) {
+    return <ErrorMessage />;
+  }
 
   return (
     <>
@@ -72,7 +79,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         {
           role: "system",
           content:
-            "You are a vegan ingredient checker. Provide the vegan status of each ingredient separately in JSON format: [{ ingredient: ingredientName, vegan: true/false, reason: 'reason for being vegan or not here, in a detailed description. if the user inputs an ingredient that is not English, please find a way to translate the name of the ingredient here, in a natural way' }]",
+            "You are a vegan ingredient checker. If the user inputs a list of ingredients that are in a different language than English, please find a way to translate the name of the ingredient in the 'reason' object, but in a natural way. Please provide the vegan status of each ingredient separately, in JSON format, like this: [{ ingredient: the ingredient name, vegan: true/false, reason: 'reason for being vegan or not here, with a detailed description' }]",
         },
         {
           role: "user",
@@ -102,6 +109,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         props: {
           ingredientInfo,
           productIsVegan,
+          errorMessage: null,
         },
       };
     } else {
@@ -109,6 +117,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
         props: {
           ingredientInfo: [],
           productIsVegan: null,
+          errorMessage: "An error occurred while processing your request.",
         },
       };
     }
@@ -117,6 +126,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       props: {
         ingredientInfo: [],
         productIsVegan: null,
+        errorMessage: `An error occurred while processing your request. 
+        ${error}`,
       },
     };
   }

@@ -12,6 +12,7 @@ import {
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { BiSearchAlt } from "react-icons/bi";
 
 export default function Home() {
   const router = useRouter();
@@ -96,8 +97,9 @@ export default function Home() {
               fontSize={{ base: "xs", md: "sm" }}
               w={{ base: "full", md: "auto" }}
               padding={isLoading ? "6px 24px" : "12px 24px"}
+              leftIcon={<BiSearchAlt />}
             >
-              Check Ingredient Vegan Status
+              Analyse product ingredients
             </Button>
           </Stack>
         </Stack>

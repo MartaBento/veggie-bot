@@ -22,6 +22,7 @@ type IngredientInfoProps = {
 
 function IngredientInfoList({ ingredientInfo }: IngredientInfoProps) {
   const textColor = useColorModeValue("gray.800", "gray.900");
+  const hoverColor = useColorModeValue("gray.800", "gray.300");
   const buttonColorScheme = useColorModeValue("sage", "fernGreen");
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -54,7 +55,12 @@ function IngredientInfoList({ ingredientInfo }: IngredientInfoProps) {
         ml={{ base: 6 }}
         mr={{ base: 6 }}
       >
-        <List spacing={3} fontSize={{ base: "xs", md: "sm" }}>
+        <List
+          spacing={3}
+          fontSize={{ base: "xs", md: "sm" }}
+          w={{ md: "400px" }}
+          h={{ md: "auto" }}
+        >
           {currentIngredients?.map((ingredient, index) => (
             <ListItem
               key={ingredient.ingredientName}
@@ -78,7 +84,7 @@ function IngredientInfoList({ ingredientInfo }: IngredientInfoProps) {
                     {ingredient.ingredientName.charAt(0).toUpperCase() +
                       ingredient.ingredientName.slice(1)}
                   </Text>
-                  <Text fontSize={{ base: "xs", md: "sm" }} color={textColor}>
+                  <Text fontSize={{ base: "xs", md: "xs" }} color={textColor}>
                     {ingredient.reason}
                   </Text>
                 </VStack>
@@ -95,10 +101,13 @@ function IngredientInfoList({ ingredientInfo }: IngredientInfoProps) {
           onClick={handlePreviousClick}
           isDisabled={currentPage === 1}
           leftIcon={<FaArrowLeft />}
-          aria-label="Previous Page"
-          bg={buttonColorScheme}
-          _hover={{ bg: buttonColorScheme, color: "white" }}
+          aria-label="Previous ingredient page"
+          variant="outline"
+          fontFamily="Nunito"
+          color={buttonColorScheme}
+          _hover={{ color: hoverColor }}
           _focus={{ boxShadow: "none" }}
+          borderRadius="full"
         >
           Previous
         </Button>
@@ -106,10 +115,13 @@ function IngredientInfoList({ ingredientInfo }: IngredientInfoProps) {
           onClick={handleNextClick}
           isDisabled={indexOfLastIngredient >= ingredientInfo.length}
           rightIcon={<FaArrowRight />}
-          aria-label="Next Page"
-          bg={buttonColorScheme}
-          _hover={{ bg: buttonColorScheme, color: "white" }}
+          aria-label="Next ingredient page"
+          variant="outline"
+          fontFamily="Nunito"
+          color={buttonColorScheme}
+          _hover={{ color: hoverColor }}
           _focus={{ boxShadow: "none" }}
+          borderRadius="full"
         >
           Next
         </Button>

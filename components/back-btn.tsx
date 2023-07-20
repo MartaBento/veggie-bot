@@ -11,14 +11,14 @@ type BackButtonProps = {
 };
 
 function BackButton({ onClick }: BackButtonProps) {
-  const buttonColor = useColorModeValue("gray.700", "gray.200");
-  const hoverColor = useColorModeValue("gray.800", "gray.300");
+  const buttonColor = useColorModeValue("gray.800", "gray.200");
+  const hoverColor = useColorModeValue("gray.900", "gray.300");
 
   return (
     <ButtonGroup
       size="sm"
       isAttached
-      variant="ghost"
+      variant="outline"
       onClick={onClick}
       fontFamily="Nunito"
       marginBottom={2}
@@ -28,8 +28,19 @@ function BackButton({ onClick }: BackButtonProps) {
         icon={<FiArrowLeft />}
         color={buttonColor}
         _hover={{ color: hoverColor }}
+        bg="transparent"
+        fontSize="lg"
+        borderRadius="full"
       />
-      <Button color={buttonColor} _hover={{ color: hoverColor }}>
+      <Button
+        color={buttonColor}
+        _hover={{ color: hoverColor, bg: "transparent" }}
+        bg="transparent"
+        borderRadius="full"
+        fontWeight="medium"
+        fontSize="sm"
+        _focus={{ boxShadow: "none" }}
+      >
         Go Back
       </Button>
     </ButtonGroup>

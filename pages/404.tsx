@@ -2,7 +2,6 @@ import {
   VStack,
   Text,
   Center,
-  Image,
   Button,
   Heading,
   useColorModeValue,
