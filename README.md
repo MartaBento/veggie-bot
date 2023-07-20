@@ -4,6 +4,7 @@ VeggieBot is a web application that helps you discover the vegan status of ingre
 
 ![VeggieBot Logo Desktop Dark](public/veggie-bot-mobile.png)
 ![VeggieBot Logo Mobile Light](public/veggie-bot-desktop.png)
+![VeggieBot Results iPad](public/veggie-bot-ipad.png)
 
 ## Features
 
