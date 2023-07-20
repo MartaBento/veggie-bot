@@ -1,19 +1,4 @@
-import {
-  Divider,
-  List,
-  ListIcon,
-  ListItem,
-  VStack,
-  HStack,
-  Text,
-  Box,
-  Heading,
-  useColorModeValue,
-  Center,
-} from "@chakra-ui/react";
-import { LuVegan } from "react-icons/lu";
-import { MdDoNotDisturbOn } from "react-icons/md";
-
+import { VStack, Box, Center } from "@chakra-ui/react";
 import BackButton from "@/components/back-btn";
 import { useRouter } from "next/router";
 import { IngredientInfo } from "@/types/apiResponse";
@@ -24,6 +9,8 @@ import { apiURL } from "@/constants/url";
 import VeganStatusBadge from "@/components/vegan-status-badge";
 import Head from "next/head";
 import { metadata } from "@/constants/metadata";
+import ResultsHeading from "@/components/results-page/results-heading";
+import IngredientInfoList from "@/components/results-page/ingredient-info-list";
 
 type ResultsPageProps = {
   ingredientInfo: IngredientInfo[];
@@ -35,7 +22,6 @@ export default function ResultsPage({
   productIsVegan,
 }: ResultsPageProps) {
   const router = useRouter();
-  const textColor = useColorModeValue("gray.800", "gray.900");
 
   const handleClickBackBtn = () => {
     router.push("/");
@@ -63,67 +49,11 @@ export default function ResultsPage({
         <Center marginTop="6">
           <VStack>
             <BackButton onClick={handleClickBackBtn} />
-            <Heading
-              as="h1"
-              fontWeight={600}
-              fontSize={{ base: "2xl", md: "6xl", sm: "4xl" }}
-              lineHeight="100%"
-              letterSpacing="tight"
-              fontFamily="Lato"
-              color={useColorModeValue("#344E41", "#DAD7CD")}
-            >
-              Ingredient Analysis
-            </Heading>
-            <Text
-              fontSize="xl"
-              color={useColorModeValue("gray.600", "gray.300")}
-              mt={2}
-              maxWidth="xl"
-              textAlign="center"
-              fontFamily="Nunito"
-            >
-              Veggie Bot has analyzed the vegan status of each ingredient and
-              provided the reasons behind it. Here are the results:
-            </Text>
+            <ResultsHeading />
           </VStack>
         </Center>
         <VeganStatusBadge productIsVegan={productIsVegan} />
-        <Box
-          borderWidth="1px"
-          borderStyle="solid"
-          borderColor="gray.300"
-          borderRadius="md"
-          p={6}
-          boxShadow="lg"
-          bg="gray.50"
-          maxW="4xl"
-        >
-          <List spacing={3} fontSize="xs">
-            {ingredientInfo?.map((ingredient, index) => (
-              <ListItem key={ingredient.ingredientName}>
-                <HStack spacing={3} align="middle">
-                  <ListIcon
-                    as={ingredient.vegan ? LuVegan : MdDoNotDisturbOn}
-                    color={ingredient.vegan ? "green" : "red"}
-                    marginY="auto"
-                  />
-                  <VStack spacing={0} align="start">
-                    <Text fontSize="sm" fontWeight="semibold" color={textColor}>
-                      {ingredient.ingredientName.charAt(0).toUpperCase() +
-                        ingredient.ingredientName.slice(1)}
-                    </Text>
-                    <Text fontSize="xs" color={textColor}>
-                      {ingredient.reason}
-                    </Text>
-                  </VStack>
-                </HStack>
-                {index !== ingredientInfo.length - 1 && (
-                  <Divider my={2} borderColor="gray.300" />
-                )}
-              </ListItem>
-            ))}
-          </List>
-        </Box>
+        <IngredientInfoList ingredientInfo={ingredientInfo} />
       </VStack>
     </>
   );
