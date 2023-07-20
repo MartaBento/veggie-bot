@@ -25,7 +25,7 @@ function VeganStatusBadge({ productIsVegan }: VeganStatusBadgeProps) {
       px={{ base: 1, md: 3 }}
       py={{ base: 1, md: 2 }}
       letterSpacing="wider"
-      marginTop={6}
+      marginTop={2}
       marginBottom={6}
       borderRadius="md"
       textColor="white"
