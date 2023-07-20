@@ -4,6 +4,7 @@ import LeafIconHeader from "./leaf-icon-header";
 function MainHeading() {
   const headingColor = useColorModeValue("#745E4D", "#DAD7CD");
   const textColor = useColorModeValue("gray.600", "gray.300");
+  const mainHeadingColor = useColorModeValue("#28323F", "#F7FAFC");
 
   return (
     <>
@@ -15,7 +16,7 @@ function MainHeading() {
           lineHeight="100%"
           letterSpacing="tight"
           fontFamily="Montserrat"
-          color="#344E41"
+          color={mainHeadingColor}
           marginBottom={{ base: "-1", md: "-2" }}
         >
           Discover the Power of AI

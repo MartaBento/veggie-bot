@@ -2,7 +2,7 @@ import { Link, Button, useColorModeValue } from "@chakra-ui/react";
 
 function BuyMeACoffeeButton() {
   const buttonColor = useColorModeValue("#8B5D33", "#DAA520");
-  const buttonTextColor = useColorModeValue("white", "#DAD7CD");
+  const buttonTextColor = useColorModeValue("white", "gray.800");
 
   return (
     <Link
