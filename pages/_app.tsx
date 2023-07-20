@@ -9,7 +9,7 @@ import { AppProps } from "next/app";
 import Footer from "@/components/common/footer";
 import Navbar from "@/components/common/navbar";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function VeggieBot({ Component, pageProps }: AppProps) {
   // Palette: https://coolors.co/dad7cd-a3b18a-588157-3a5a40-344e41
   const colors = {
     timberwolf: "#DAD7CD",
@@ -52,4 +52,4 @@ function MyApp({ Component, pageProps }: AppProps) {
   );
 }
 
-export default MyApp;
+export default VeggieBot;

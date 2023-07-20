@@ -1,4 +1,4 @@
-import { VStack, Box, Center } from "@chakra-ui/react";
+import { VStack, Center } from "@chakra-ui/react";
 import BackButton from "@/components/back-btn";
 import { useRouter } from "next/router";
 import { IngredientInfo } from "@/types/apiResponse";
@@ -30,10 +30,6 @@ export default function ResultsPage({
     router.push("/");
   };
 
-  if (!errorMessage) {
-    return <ErrorMessage />;
-  }
-
   return (
     <>
       <Head>
@@ -52,16 +48,19 @@ export default function ResultsPage({
           href={metadata.icons.shortcut}
         />
       </Head>
-      <VStack align="center" spacing={3}>
-        <Center marginTop="6">
-          <VStack>
-            <BackButton onClick={handleClickBackBtn} />
-            <ResultsHeading />
-          </VStack>
-        </Center>
-        <VeganStatusBadge productIsVegan={productIsVegan} />
-        <IngredientInfoList ingredientInfo={ingredientInfo} />
-      </VStack>
+      {errorMessage && <ErrorMessage />}
+      {!errorMessage && (
+        <VStack align="center" spacing={3}>
+          <Center marginTop="6">
+            <VStack>
+              <BackButton onClick={handleClickBackBtn} />
+              <ResultsHeading />
+            </VStack>
+          </Center>
+          <VeganStatusBadge productIsVegan={productIsVegan} />
+          <IngredientInfoList ingredientInfo={ingredientInfo} />
+        </VStack>
+      )}
     </>
   );
 }

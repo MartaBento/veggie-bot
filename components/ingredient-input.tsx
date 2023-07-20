@@ -15,7 +15,17 @@ function IngredientInput({ onChange }: IngredientInputProps) {
     const value = event.target.value;
     const cleanedValue = value.replace(/\s+/g, " ").trim();
     const ingredients = cleanedValue.split(/[,\/\n|;]/);
-    onChange(ingredients);
+    const filteredIngredients = ingredients.filter(
+      (ingredient) => ingredient.trim() !== ""
+    );
+    if (
+      filteredIngredients.length === 1 &&
+      (filteredIngredients[0] === "." || filteredIngredients[0] === "")
+    ) {
+      onChange([]);
+    } else {
+      onChange(filteredIngredients);
+    }
   };
 
   return (
