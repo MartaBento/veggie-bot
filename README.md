@@ -17,6 +17,7 @@ VeggieBot is a web application that helps you discover the vegan status of ingre
 
 - [ ] File Upload (.csv, .txt or others);
 - [ ] Ingredient scanner through device camera
+- [ ] Vegetarian checker
 
 ## Technologies Used
 
@@ -27,10 +28,41 @@ VeggieBot is a web application that helps you discover the vegan status of ingre
 
 ## Installation
 
-1. Clone the repository: `git clone https://github.com/MartaBento/veggie-bot.git`
-2. Install dependencies: `npm install`
-3. Run the development server: `npm run dev`
-4. Open your browser and go to `http://localhost:3000` to see VeggieBot in action.
+1. Clone the repository:
+
+```bash
+git clone https://github.com/MartaBento/veggie-bot.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd veggie-bot
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+```
+
+4. Set up environment variables:
+  - Create a new file named `.env.local` in the project root directory.
+  - Add the following lines to the `.env.local` file:
+
+```bash
+# .env.local
+
+NEXT_PUBLIC_OPENAI_KEY=your-openai-api-key
+```
+
+5. Start the development server:
+
+```bash
+npm run dev
+```
+
+6. Open your browser and visit `http://localhost:3000` to see the application running.
 
 ## Usage
 
