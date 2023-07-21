@@ -13,6 +13,11 @@ VeggieBot is a web application that helps you discover the vegan status of ingre
 - Light/Dark mode;
 - Mobile friendly.
 
+## Features backlog
+
+- [ ] File Upload (.csv, .txt or others);
+- [ ] Ingredient scanner through device camera
+
 ## Technologies Used
 
 - [Chakra UI](https://chakra-ui.com/): For building the user interface with style and accessibility in mind.
