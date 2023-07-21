@@ -4,6 +4,7 @@ const nextConfig = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  serverTimeout: 45000,
 };
 
 module.exports = nextConfig;
