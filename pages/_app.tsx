@@ -9,6 +9,7 @@ import { AppProps } from "next/app";
 import Footer from "@/components/common/footer";
 import Navbar from "@/components/common/navbar";
 import { Analytics } from "@vercel/analytics/react";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 function VeggieBot({ Component, pageProps }: AppProps) {
   const colors = {
@@ -43,13 +44,17 @@ function VeggieBot({ Component, pageProps }: AppProps) {
     },
   });
 
+  const queryClient = new QueryClient();
+
   return (
-    <ChakraProvider theme={theme}>
-      <Navbar />
-      <Component {...pageProps} />
-      <Analytics />
-      <Footer />
-    </ChakraProvider>
+    <QueryClientProvider client={queryClient}>
+      <ChakraProvider theme={theme}>
+        <Navbar />
+        <Component {...pageProps} />
+        <Analytics />
+        <Footer />
+      </ChakraProvider>
+    </QueryClientProvider>
   );
 }
 

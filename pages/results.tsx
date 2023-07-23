@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { IngredientInfo } from "@/types/apiResponse";
 import { responseParse } from "@/utils/responseParser";
 import { isProductVegan } from "@/utils/veganAnalyser";
-import { GetServerSidePropsContext } from "next";
 import { apiURL } from "@/constants/url";
 import VeganStatusBadge from "@/components/vegan-status-badge";
 import Head from "next/head";
@@ -12,23 +11,75 @@ import { metadata } from "@/constants/metadata";
 import ResultsHeading from "@/components/results-page/results-heading";
 import IngredientInfoList from "@/components/results-page/ingredient-info-list";
 import ErrorMessage from "@/components/results-page/error";
+import { fetchData } from "@/utils/fetchDataOpenAI";
+import { useQuery, useQueryClient } from "react-query";
+import { useEffect, useMemo, useState } from "react";
 
-type ResultsPageProps = {
-  ingredientInfo: IngredientInfo[];
-  productIsVegan: boolean | null;
-  errorMessage: string | null;
-};
+const BATCH_SIZE = 5; // Number of ingredients per batch
 
-export default function ResultsPage({
-  ingredientInfo,
-  productIsVegan,
-  errorMessage,
-}: ResultsPageProps) {
+export default function ResultsPage() {
   const router = useRouter();
+  const queryClient = useQueryClient();
+
+  const userIngredients = useMemo(
+    () => (router.query.ingredients as string)?.split(",") || [],
+    [router.query.ingredients]
+  );
+  const [batchIndex, setBatchIndex] = useState(0);
+
+  const batch = userIngredients.slice(
+    batchIndex * BATCH_SIZE,
+    (batchIndex + 1) * BATCH_SIZE
+  );
+
+  const { data, error, isPreviousData } = useQuery({
+    queryKey: ["ingredients", batchIndex],
+    queryFn: () => fetchData(batch),
+    initialData: () => {
+      const storedData = queryClient.getQueryData<IngredientInfo[]>([
+        "ingredients",
+        batchIndex,
+      ]);
+      return storedData || null;
+    },
+    keepPreviousData: true,
+  });
 
   const handleClickBackBtn = () => {
     router.push("/");
   };
+
+  const handleClickNextBtn = () => {
+    if ((batchIndex + 1) * BATCH_SIZE < userIngredients.length) {
+      setBatchIndex(batchIndex + 1);
+    } else {
+      console.log("All ingredients fetched");
+    }
+  };
+
+  const handleClickPreviousBtn = () => {
+    if (batchIndex > 0) {
+      setBatchIndex(batchIndex - 1);
+    } else {
+      console.log("Already at the first batch");
+    }
+  };
+
+  useEffect(() => {
+    // Prefetch the next page only if it's not previous data
+    if (!isPreviousData && data?.hasMore) {
+      queryClient.prefetchQuery({
+        queryKey: ["ingredients", batchIndex + 1],
+        queryFn: () =>
+          fetchData(
+            userIngredients.slice(
+              (batchIndex + 1) * BATCH_SIZE,
+              (batchIndex + 2) * BATCH_SIZE
+            )
+          ),
+      });
+    }
+  }, [isPreviousData, data, queryClient, userIngredients, batchIndex]);
 
   return (
     <>
@@ -37,8 +88,9 @@ export default function ResultsPage({
         <meta name="description" content={metadata.description} />
         <link rel="manifest" href="/manifest.json" />
       </Head>
-      {errorMessage && <ErrorMessage />}
-      {!errorMessage && (
+      {error && <ErrorMessage />}
+      {batch}
+      {!error && (
         <VStack align="center" spacing={3}>
           <Center marginTop="6">
             <VStack>
@@ -46,77 +98,17 @@ export default function ResultsPage({
               <ResultsHeading />
             </VStack>
           </Center>
-          <VeganStatusBadge productIsVegan={productIsVegan} />
-          <IngredientInfoList ingredientInfo={ingredientInfo} />
+          <button
+            onClick={handleClickNextBtn}
+            disabled={(batchIndex + 1) * BATCH_SIZE >= userIngredients.length}
+          >
+            Next
+          </button>
+          <button onClick={handleClickPreviousBtn} disabled={batchIndex <= 0}>
+            Previous
+          </button>
         </VStack>
       )}
     </>
   );
-}
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { query } = context;
-  const { ingredients } = query;
-
-  try {
-    const apiKey = process.env.NEXT_PUBLIC_OPENAI_KEY;
-
-    const requestBody = {
-      model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "system",
-          content:
-            "You are a vegan ingredient checker. If the user inputs a list of ingredients that are in a different language than English, please find a way to translate the name of the ingredient in the 'reason' object, but in a natural way. Please provide the vegan status of each ingredient separately, in JSON format, like this: [{ ingredient: the ingredient name, vegan: true/false, reason: 'reason for being vegan or not here, with a detailed description' }]",
-        },
-        {
-          role: "user",
-          content: `Ingredients: ${ingredients}`,
-        },
-      ],
-      temperature: 0.2,
-    };
-
-    const response = await fetch(apiURL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify(requestBody),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      const ingredientInfo = responseParse(data);
-      const productIsVegan = !ingredientInfo
-        ? null
-        : isProductVegan(ingredientInfo);
-
-      return {
-        props: {
-          ingredientInfo,
-          productIsVegan,
-          errorMessage: null,
-        },
-      };
-    } else {
-      return {
-        props: {
-          ingredientInfo: [],
-          productIsVegan: null,
-          errorMessage: "An error occurred while processing your request.",
-        },
-      };
-    }
-  } catch (error) {
-    return {
-      props: {
-        ingredientInfo: [],
-        productIsVegan: null,
-        errorMessage: `An error occurred while processing your request. 
-        ${error}`,
-      },
-    };
-  }
 }
