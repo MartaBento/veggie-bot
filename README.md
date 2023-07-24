@@ -1,10 +1,15 @@
-# VeggieBot 🌱
+
+<div align="center">
+  <h1 align="center">VeggieBot 🌱</h1>
+</div>
 
 VeggieBot is a web application that helps you discover the vegan status of ingredients instantly. It empowers you to make informed choices and lead a cruelty-free and sustainable way of living.
 
 ![VeggieBot Logo Desktop Dark](public/veggie-bot-mobile.png)
 ![VeggieBot Logo Mobile Light](public/veggie-bot-desktop.png)
 ![VeggieBot Results iPad](public/veggie-bot-ipad.png)
+
+Currently, VeggieBot supports only the input of 5 ingredients.
 
 ## Features
 
@@ -16,7 +21,7 @@ VeggieBot is a web application that helps you discover the vegan status of ingre
 ## Features backlog
 
 - [ ] File Upload (.csv, .txt or others);
-- [ ] Ingredient scanner through device camera
+- [ ] Ingredient scanner through the device camera
 - [ ] Vegetarian checker
 
 ## Technologies Used
