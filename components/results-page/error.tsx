@@ -10,10 +10,21 @@ import { RiErrorWarningFill } from "react-icons/ri";
 import Link from "next/link";
 
 function ErrorMessage() {
-  const headingColor = useColorModeValue("#344E41", "#DAD7CD");
-  const textColor = useColorModeValue("#344E41", "#DAD7CD");
-  const buttonColorScheme = useColorModeValue("sage", "fernGreen");
-  const buttonTextColor = useColorModeValue("white", "black");
+  const { headingColor, textColor, buttonColorScheme, buttonTextColor } =
+    useColorModeValue(
+      {
+        headingColor: "#344E41",
+        textColor: "#344E41",
+        buttonColorScheme: "sage",
+        buttonTextColor: "white",
+      },
+      {
+        headingColor: "#DAD7CD",
+        textColor: "#DAD7CD",
+        buttonColorScheme: "fernGreen",
+        buttonTextColor: "black",
+      }
+    );
 
   return (
     <Center minHeight="50vh" p={4}>
@@ -47,8 +58,9 @@ function ErrorMessage() {
             _hover={{ opacity: 0.9, boxShadow: "md" }}
             fontFamily="Montserrat, sans-serif"
             fontWeight={700}
-            fontSize={{ base: "sm", md: "md" }}
+            fontSize={{ base: "md", md: "lg", lg: "xl" }}
             letterSpacing="wider"
+            textAlign="center"
           >
             Take me back to VeggieBot Home
           </Button>

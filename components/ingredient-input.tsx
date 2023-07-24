@@ -24,8 +24,6 @@ function IngredientInput({ onChange }: IngredientInputProps) {
   const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.target.value;
     const cleanedValue = value.replace(/\s+/g, " ").trim();
-
-    // Use a more comprehensive regex to split ingredients
     const ingredients = cleanedValue.split(/,(?![^(]*\))/);
 
     const filteredIngredients = ingredients.map((ingredient) =>

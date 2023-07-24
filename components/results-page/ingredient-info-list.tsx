@@ -22,8 +22,25 @@ function IngredientInfoList({ ingredientInfo }: IngredientInfoProps) {
   const textColor = useColorModeValue("gray.800", "gray.900");
 
   if (!ingredientInfo || ingredientInfo.length === 0) {
-    return null;
+    return (
+      <Box
+        p={6}
+        borderWidth="1px"
+        borderStyle="solid"
+        borderColor="gray.300"
+        borderRadius="md"
+        boxShadow="lg"
+        bg="gray.50"
+        ml={6}
+        mr={6}
+      >
+        <Text textAlign="center" color={textColor} fontSize="md">
+          No ingredient information available.
+        </Text>
+      </Box>
+    );
   }
+
   return (
     <>
       <Box

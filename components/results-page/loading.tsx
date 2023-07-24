@@ -2,7 +2,7 @@ import { getRandomLoadingText } from "@/utils/loadingBtnRandomizer";
 import { Center, Spinner, Text } from "@chakra-ui/react";
 
 function Loading() {
-  const funnySentence = getRandomLoadingText();
+  const loadingSentence = getRandomLoadingText();
 
   return (
     <Center height="50vh" flexDirection="column">
@@ -12,9 +12,10 @@ function Loading() {
         emptyColor="gray.200"
         color="green.500"
         size="xl"
+        label={loadingSentence}
       />
       <Text mt={4} fontFamily="Nunito">
-        {funnySentence}
+        {loadingSentence}
       </Text>
     </Center>
   );
