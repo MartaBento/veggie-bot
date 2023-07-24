@@ -14,7 +14,7 @@ export async function fetchData(
       {
         role: "system",
         content:
-          "You are a vegan ingredient checker. Provide the vegan status of each ingredient separately in JSON format: [{ ingredient: ingredient name, vegan: true/false, reason: 'reason for being vegan or not, with a very detailed description' }]",
+          "You are a vegan ingredient checker. Always provide the information in English, no matter the language the user uses. Provide the vegan status of each ingredient separately in JSON format: [{ ingredient: ingredient name, vegan: true/false, reason: 'reason for being vegan or not, with a very detailed description' }]",
       },
       {
         role: "user",
