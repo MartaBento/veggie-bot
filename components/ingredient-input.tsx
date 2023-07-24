@@ -24,15 +24,18 @@ function IngredientInput({ onChange }: IngredientInputProps) {
   const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.target.value;
     const cleanedValue = value.replace(/\s+/g, " ").trim();
-    const ingredients = cleanedValue.split(/[,\/\n|;]/);
-    const filteredIngredients = ingredients.filter(
-      (ingredient) => ingredient.trim() !== ""
+
+    // Use a more comprehensive regex to split ingredients
+    const ingredients = cleanedValue.split(/,(?![^(]*\))/);
+
+    const filteredIngredients = ingredients.map((ingredient) =>
+      ingredient.trim()
     );
 
     const limitedIngredients = filteredIngredients.slice(0, maxIngredients);
 
     if (filteredIngredients.length > maxIngredients) {
-      setIngredientsInput(limitedIngredients.join(","));
+      setIngredientsInput(limitedIngredients.join(", "));
       setShowErrorMessage(true);
       onChange(limitedIngredients);
     } else {
