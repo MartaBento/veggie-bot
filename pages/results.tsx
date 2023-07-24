@@ -10,6 +10,7 @@ import ErrorMessage from "@/components/results-page/error";
 import { fetchData } from "@/utils/fetchDataOpenAI";
 import { useQuery, useQueryClient } from "react-query";
 import VeganStatusBadge from "@/components/vegan-status-badge";
+import Loading from "@/components/results-page/loading";
 
 export default function ResultsPage() {
   const router = useRouter();
@@ -37,10 +38,6 @@ export default function ResultsPage() {
     router.push("/");
   };
 
-  if (!isFetched) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <>
       <Head>
@@ -60,7 +57,10 @@ export default function ResultsPage() {
               )}
             </VStack>
           </Center>
-          {data && <IngredientInfoList ingredientInfo={data.ingredientInfo} />}
+          {!isFetched && <Loading />}
+          {isFetched && data && (
+            <IngredientInfoList ingredientInfo={data.ingredientInfo} />
+          )}
         </VStack>
       )}
     </>

@@ -1,4 +1,5 @@
 import { IngredientInfo } from "@/types/apiResponse";
+import { formatUserInput } from "@/utils/formatUserInput";
 import {
   List,
   ListItem,
@@ -62,8 +63,7 @@ function IngredientInfoList({ ingredientInfo }: IngredientInfoProps) {
                     fontWeight="semibold"
                     color={textColor}
                   >
-                    {ingredient.ingredientName.charAt(0).toUpperCase() +
-                      ingredient.ingredientName.slice(1)}
+                    {formatUserInput(ingredient.ingredientName)}
                   </Text>
                   <Text fontSize={{ base: "xs", md: "xs" }} color={textColor}>
                     {ingredient.detailedInfo}
