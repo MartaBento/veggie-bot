@@ -18,21 +18,28 @@ export default function ResultsPage() {
   const userIngredients =
     (router.query.ingredients as string)?.split(",") || [];
 
-  const { data, error } = useQuery({
-    queryKey: ["ingredients"],
-    queryFn: () => fetchData(userIngredients),
-    initialData: () => {
-      const storedData = queryClient.getQueryData<FetchDataResult>([
-        "ingredients",
-      ]);
-      return storedData || null;
-    },
-    keepPreviousData: true,
-  });
+  const { data, error, isFetched } = useQuery<FetchDataResult | null>(
+    ["ingredients"],
+    () => fetchData(userIngredients),
+    {
+      initialData: () => {
+        const storedData = queryClient.getQueryData<FetchDataResult>([
+          "ingredients",
+        ]);
+        return storedData || null;
+      },
+      keepPreviousData: true,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   const handleClickBackBtn = () => {
     router.push("/");
   };
+
+  if (!isFetched) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>

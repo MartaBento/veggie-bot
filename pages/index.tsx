@@ -38,8 +38,7 @@ export default function Home() {
     }
   };
 
-  const numIngredients = userInputIngredients.length;
-  const btnDisabled = isLoading || numIngredients === 0;
+  const btnDisabled = isLoading || userInputIngredients.length === 0;
   const loadingBtnText = getRandomLoadingText();
 
   return (
