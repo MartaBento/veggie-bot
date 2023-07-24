@@ -3,6 +3,7 @@ import { APIResponse, IngredientInfo } from "@/types/apiResponse";
 export function responseParse(response: APIResponse): IngredientInfo[] {
   const content = response.choices[0].message.content;
   let ingredientInfo: IngredientInfo[] = [];
+  
 
   try {
     const parsedContent = JSON.parse(content);
@@ -10,8 +11,8 @@ export function responseParse(response: APIResponse): IngredientInfo[] {
     if (Array.isArray(parsedContent)) {
       ingredientInfo = parsedContent.map((item: any) => ({
         ingredientName: item.ingredient,
-        vegan: item.vegan,
-        reason: item.reason,
+        isIngredientVegan: item.vegan,
+        detailedInfo: item.reason,
       }));
     }
   } catch (error) {

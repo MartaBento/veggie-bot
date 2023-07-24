@@ -30,8 +30,7 @@ export default function Home() {
   const handleSubmitIngredients = async () => {
     try {
       setIsLoading(true);
-      const queryParams = userInputIngredients.join(",");
-      await router.push(`/results?ingredients=${queryParams}`);
+      await router.push(`/results?ingredients=${userInputIngredients}`);
     } catch (error) {
       console.error("Error occurred while navigating to results page:", error);
     } finally {
@@ -39,8 +38,8 @@ export default function Home() {
     }
   };
 
-  const btnDisabled =
-    isLoading || !userInputIngredients || userInputIngredients.length === 0;
+  const numIngredients = userInputIngredients.length;
+  const btnDisabled = isLoading || numIngredients === 0;
   const loadingBtnText = getRandomLoadingText();
 
   return (

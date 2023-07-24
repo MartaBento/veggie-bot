@@ -1,7 +1,13 @@
 export interface IngredientInfo {
   ingredientName: string;
-  vegan: boolean;
-  reason: string;
+  isIngredientVegan: boolean;
+  detailedInfo: string;
+}
+
+export interface FetchDataResult {
+  isIngredientVegan: boolean;
+  ingredientInfo: IngredientInfo[];
+  errorMessage: string | null;
 }
 
 interface ChatCompletion {

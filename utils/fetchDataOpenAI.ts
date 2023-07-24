@@ -1,8 +1,9 @@
 import { apiURL } from "@/constants/url";
 import { responseParse } from "./responseParser";
-import { isProductVegan } from "./veganAnalyser";
+import { FetchDataResult } from "@/types/apiResponse";
+import { checkIfIngredientsAreVegan } from "./veganAnalyser";
 
-export async function fetchData(ingredients: string[]): Promise<any> {
+export async function fetchData(ingredients: string[]): Promise<FetchDataResult> {
     const apiKey = process.env.NEXT_PUBLIC_OPENAI_KEY;
 
     const requestBody = {
@@ -11,7 +12,7 @@ export async function fetchData(ingredients: string[]): Promise<any> {
           {
             role: "system",
             content:
-              "You are a vegan ingredient checker. If the user inputs a list of ingredients that are in a different language than English, please find a way to translate the name of the ingredient in the 'reason' object, but in a natural way. Please provide the vegan status of each ingredient separately, in JSON format, like this: [{ ingredient: the ingredient name, vegan: true/false, reason: 'reason for being vegan or not here, with a detailed description' }]",
+              "You are a vegan ingredient checker. If the user inputs a list of ingredients that are in a different language than English, translate the name of the ingredient in the 'reason' field, but in a natural way. If the product is vegan, you will provide the vegan status of the product in the field 'isProductVegan'. The ingredient name should be simplified - if you receive percentages, remove them. Provide the vegan status of each ingredient separately, in JSON format, like this: [{ isProductVegan: true/false, ingredient: the ingredient name, vegan: true/false, reason: 'reason for being vegan or not here, with a detailed description' }]",
           },
           {
             role: "user",
@@ -37,13 +38,11 @@ export async function fetchData(ingredients: string[]): Promise<any> {
   
       const data = await response.json();
       const ingredientInfo = responseParse(data);
-      const productIsVegan = !ingredientInfo
-        ? null
-        : isProductVegan(ingredientInfo);
-        
+      const isIngredientVegan = checkIfIngredientsAreVegan(ingredientInfo);
+
       return {
         ingredientInfo,
-        productIsVegan,
+        isIngredientVegan,
         errorMessage: null,
       };
     } catch (error) {

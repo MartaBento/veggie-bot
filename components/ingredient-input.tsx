@@ -1,5 +1,12 @@
-import { Textarea, FormLabel, useColorModeValue, Box } from "@chakra-ui/react";
-import { ChangeEvent } from "react";
+import { maxIngredients } from "@/constants/ingredients";
+import {
+  Textarea,
+  FormLabel,
+  useColorModeValue,
+  Box,
+  Text,
+} from "@chakra-ui/react";
+import { ChangeEvent, useState } from "react";
 
 type IngredientInputProps = {
   onChange: (ingredients: string[]) => void;
@@ -11,6 +18,9 @@ function IngredientInput({ onChange }: IngredientInputProps) {
   const backgroundColor = useColorModeValue("#DAD7CD", "gray.700");
   const textColor = useColorModeValue("#344E41", "whiteAlpha.900");
 
+  const [ingredientsInput, setIngredientsInput] = useState<string>("");
+  const [showErrorMessage, setShowErrorMessage] = useState<boolean>(false);
+
   const handleInputChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     const value = event.target.value;
     const cleanedValue = value.replace(/\s+/g, " ").trim();
@@ -18,13 +28,17 @@ function IngredientInput({ onChange }: IngredientInputProps) {
     const filteredIngredients = ingredients.filter(
       (ingredient) => ingredient.trim() !== ""
     );
-    if (
-      filteredIngredients.length === 1 &&
-      (filteredIngredients[0] === "." || filteredIngredients[0] === "")
-    ) {
-      onChange([]);
+
+    const limitedIngredients = filteredIngredients.slice(0, maxIngredients);
+
+    if (filteredIngredients.length > maxIngredients) {
+      setIngredientsInput(limitedIngredients.join(","));
+      setShowErrorMessage(true);
+      onChange(limitedIngredients);
     } else {
-      onChange(filteredIngredients);
+      setIngredientsInput(value);
+      setShowErrorMessage(false);
+      onChange(limitedIngredients);
     }
   };
 
@@ -32,7 +46,7 @@ function IngredientInput({ onChange }: IngredientInputProps) {
     <Box>
       <FormLabel
         htmlFor="ingredients"
-        fontSize={{ base: "xs", md: "sm" }} // Adjust font size for mobile
+        fontSize={{ base: "xs", md: "sm" }}
         fontWeight="bold"
         mb={1}
         color={useColorModeValue("gray.700", "gray.200")}
@@ -42,6 +56,7 @@ function IngredientInput({ onChange }: IngredientInputProps) {
       </FormLabel>
       <Textarea
         id="ingredients"
+        value={ingredientsInput}
         placeholder="Enter ingredients separated by commas (e.g., egg, onion, tomato, cheese, pasta...)"
         size="lg"
         borderWidth="1px"
@@ -67,6 +82,11 @@ function IngredientInput({ onChange }: IngredientInputProps) {
         onChange={handleInputChange}
         fontFamily="Nunito"
       />
+      {showErrorMessage && (
+        <Text color="red.500" fontWeight="bold" fontSize="sm" mt="2">
+          You can only enter up to {maxIngredients} ingredients.
+        </Text>
+      )}
     </Box>
   );
 }
