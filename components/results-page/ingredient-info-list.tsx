@@ -82,7 +82,10 @@ function IngredientInfoList({ ingredientInfo }: IngredientInfoProps) {
                   >
                     {formatUserInput(ingredient.ingredientName)}
                   </Text>
-                  <Text fontSize={{ base: "xs", md: "xs" }} color={textColor}>
+                  <Text
+                    fontSize={{ base: "xs", md: "small" }}
+                    color={textColor}
+                  >
                     {ingredient.detailedInfo}
                   </Text>
                 </VStack>

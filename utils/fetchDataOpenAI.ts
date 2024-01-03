@@ -2,12 +2,11 @@ import { apiURL } from "@/constants/url";
 import { responseParse } from "./responseParser";
 import { FetchDataResult } from "@/types/apiResponse";
 import { checkIfIngredientsAreVegan } from "./veganAnalyser";
+import axios from "axios";
 
 export async function fetchData(
   ingredients: string[]
 ): Promise<FetchDataResult> {
-  const apiKey = process.env.NEXT_PUBLIC_OPENAI_KEY;
-
   const requestBody = {
     model: "gpt-3.5-turbo",
     messages: [
@@ -25,20 +24,13 @@ export async function fetchData(
   };
 
   try {
-    const response = await fetch(apiURL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify(requestBody),
-    });
+    const response = await axios.post(apiURL, requestBody);
 
-    if (!response.ok) {
+    if (!response.data) {
       throw new Error("An error occurred while processing your request.");
     }
 
-    const data = await response.json();
+    const data = await response.data;
     const ingredientInfo = responseParse(data);
     const isIngredientVegan = checkIfIngredientsAreVegan(ingredientInfo);
 
